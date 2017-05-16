@@ -11,7 +11,7 @@
 
         <!-- You can turn off the avatar in _config.yml by setting to false -->
         {% if site.resume_avatar == 'true' %}
-        <img src="images/avatar.jpg" alt="my photo" class="avatar no-print" itemprop="image">
+        <img src="https://secure.gravatar.com/avatar/5ab84827dd84cf733e28796d8eced786?s=144" alt="my photo" class="avatar no-print" itemprop="image">
         {% endif %}
 
         <!-- Your name is defined in the _config.yml file -->
@@ -69,15 +69,17 @@
       <!-- begin Education -->
       <section class="content-section">
         <header class="section-header">
-          <h2>Education</h2>
+          <h2>Professional Training</h2>
         </header>
 
         {% for education in site.data.education %}
         <div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/CollegeOrUniversity">
-          <h3 class="resume-item-title" itemprop="name">{{ education.uni }}</h3>
-          <h4 class="resume-item-details" itemprop="description"><span style="display: block; float:left;">{{ education.degree }}</span><span style="display: block; float:right;">{{ education.year }}</span></h4>
+          <h3 class="resume-item-title" itemprop="name">{{ education.organization }}</h3>
+          {% for course in education.courses %}
+          <h4 class="resume-item-details" itemprop="description"><span style="display: block; float:left;">{{ course.name }}</span><span style="display: block; float:right;">{{ course.year }}</span></h4><br/>
           <h5 class="resume-item-details" itemprop="description">{{ education.awards }}</h5>
           <p class="resume-item-copy">{{ education.summary }}</p>
+          {% endfor %}
         </div>
         {% endfor %}
       </section>
@@ -134,7 +136,7 @@
         <div class="resume-item">
           <h3 class="resume-item-title" itemprop="award">{{ recognition.award }}</h3>
           <h4 class="resume-item-details">{{ recognition.organisation }} &bull; {{ recognition.year }}</h4>
-          <p class="resume-item-copy">{{ recognition.summary }}</p>
+          <!--<p class="resume-item-copy">{{ recognition.summary }}</p>-->
         </div>
         {% endfor %}
 
@@ -182,6 +184,25 @@
       <!-- end Links -->
       {% endif %}
 
+      {% if site.resume_section_other %}
+      <!-- begin Other -->
+      <section class="content-section">
+
+        <header class="section-header">
+          <h2>Other</h2>
+        </header>
+
+      <ul class="resume-item-list">
+        {% for misc in site.data.other %}
+          <div class="resume-item">
+            <li> {{ misc.summary }} </li>
+          </div>
+        {% endfor %}
+      </ul>
+      </section>
+      <!-- end Other -->
+      {% endif %}
+
       {% if site.resume_print_social_links %}
       <!-- begin Print Social Links -->
       <section class="content-section print-only">
@@ -200,7 +221,6 @@
 
       <footer class="page-footer">
         <p class="footer-line">Made by <a href="http://twitter.com/jglovier">@jglovier</a>. Fork me on <a href="https://github.com/jglovier/resume-template">GitHub</a>.</p>
-        <p class="footer-line">If this is your live resume, you can modify or remove this part. ;-)</p>
       </footer>
 
     </div>
